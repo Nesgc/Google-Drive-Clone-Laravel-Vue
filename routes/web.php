@@ -27,7 +27,14 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/my-files', [FileController::class, 'myFiles'])->name('myFiles');
+Route::controller(\App\Http\Controllers\FileController::class)
+    ->middleware(['auth', 'verified'])
+    ->group(function () {
+        Route::get('/my-files', 'myFiles')->name('myFiles');
+        Route::get('/create/folder', 'createFolder')->name('folder.create');
+    });
+
+
 
 
 Route::get('/dashboard', function () {
@@ -40,4 +47,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

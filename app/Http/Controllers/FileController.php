@@ -7,7 +7,12 @@ use Inertia\Inertia;
 
 class FileController extends Controller
 {
-    public function myFiles(){
+    public function myFiles()
+    {
         return Inertia::render('MyFiles');
+    }
+
+    public function createFolder()
+    {
     }
 }
